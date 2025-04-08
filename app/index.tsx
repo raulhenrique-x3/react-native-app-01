@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { Avatar, Input, Button, Icon } from '@rneui/themed';
+import { Link } from "expo-router";
 
 export default function Index() {
 
@@ -43,6 +44,8 @@ export default function Index() {
               marginVertical: 10,
             }}
           />
+          <Link
+          href={'/register'}>
           <Button
             title="Cadastre-se"
             buttonStyle={{
@@ -54,7 +57,8 @@ export default function Index() {
               marginHorizontal: 50,
               marginVertical: 10,
             }}
-          />
+          /></Link>
+         
         </View>
       </View>
 
