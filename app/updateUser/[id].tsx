@@ -3,15 +3,14 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-export default function AddUserScreen() {
+export default function UpdateUser() {
   const router = useRouter();
   const [name, setName] = useState('');
-  const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [telefone, setTelefone] = useState('');
 
   const handleSave = () => {
-    console.log({ name, cpf, email, password });
+    console.log({ name, email, telefone });
     router.back(); 
   };
 
@@ -28,17 +27,19 @@ export default function AddUserScreen() {
         <Text style={styles.label}>nome</Text>
         <TextInput style={styles.input} value={name} onChangeText={setName} />
 
-        <Text style={styles.label}>cpf</Text>
-        <TextInput style={styles.input} value={cpf} onChangeText={setCpf} />
 
         <Text style={styles.label}>email</Text>
         <TextInput style={styles.input} value={email} onChangeText={setEmail} keyboardType="email-address" />
 
-        <Text style={styles.label}>senha</Text>
-        <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry />
+        <Text style={styles.label}>telefone</Text>
+        <TextInput style={styles.input} value={telefone} onChangeText={setTelefone} secureTextEntry />
 
         <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-          <Text style={styles.saveButtonText}>Salvar</Text>
+          <Text style={styles.saveButtonText}>Alterar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.removeButton} onPress={handleSave}>
+          <Text style={styles.saveButtonText}>Excluir</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -90,5 +91,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  removeButton: {
+    backgroundColor: '#FF0000',
+    marginTop: 30,
+    paddingVertical: 14,
+    alignItems: 'center',
+    borderRadius: 4,
   },
 });

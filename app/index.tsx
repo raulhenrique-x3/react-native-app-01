@@ -1,9 +1,10 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { Avatar, Input, Button, Icon } from '@rneui/themed';
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 export default function Index() {
+  const router = useRouter();
 
   return (
     <View
@@ -32,33 +33,36 @@ export default function Index() {
         </View>
 
         <View>
-          <Button
-            title="Logar"
-            buttonStyle={{
-              backgroundColor: 'rgba(78, 116, 289, 1)',
-              borderRadius: 3,
-            }}
-            containerStyle={{
-              width: 200,
-              marginHorizontal: 50,
-              marginVertical: 10,
-            }}
-          />
+          <Link href={'/home'}
+          >
+            <Button
+              title="Logar"
+              buttonStyle={{
+                backgroundColor: 'rgba(78, 116, 289, 1)',
+                borderRadius: 3,
+              }}
+              containerStyle={{
+                width: 200,
+                marginHorizontal: 50,
+                marginVertical: 10,
+              }}
+            /></Link>
+
           <Link
-          href={'/register'}>
-          <Button
-            title="Cadastre-se"
-            buttonStyle={{
-              backgroundColor: 'rgba(78, 116, 289, 1)',
-              borderRadius: 3,
-            }}
-            containerStyle={{
-              width: 200,
-              marginHorizontal: 50,
-              marginVertical: 10,
-            }}
-          /></Link>
-         
+            href={'/register'}>
+            <Button
+              title="Cadastre-se"
+              buttonStyle={{
+                backgroundColor: 'rgba(78, 116, 289, 1)',
+                borderRadius: 3,
+              }}
+              containerStyle={{
+                width: 200,
+                marginHorizontal: 50,
+                marginVertical: 10,
+              }}
+            /></Link>
+
         </View>
       </View>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Link, useRouter } from 'expo-router';
 
 const contacts = [
   { id: '1', name: 'Marcos Andrade', phone: '81 988553424' },
@@ -9,8 +10,10 @@ const contacts = [
 ];
 
 export default function HomeScreen() {
+  const router = useRouter();
   const renderItem = ({ item }: { item: { id: string, name: string, phone: string } }) => (
-    <View style={styles.contactCard}>
+    <TouchableOpacity onPress={() => router.navigate('/updateUser', { id: item.id})}>
+          <View style={styles.contactCard}>
       <View style={styles.contactIcon}>
         <Ionicons name="person-circle" size={48} color="#1976D2" />
       </View>
@@ -19,21 +22,25 @@ export default function HomeScreen() {
         <Text style={styles.contactPhone}>{item.phone}</Text>
       </View>
     </View>
+    </TouchableOpacity>
+
   );
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Lista de Contatos</Text>
-        <TouchableOpacity style={styles.addButton}>
-          <Ionicons name="add-circle" size={32} color="white" />
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.addButton} onPress={() => router.navigate('/userRegister')}>
+            <Ionicons name="add-circle" size={32} color="white" />
+          </TouchableOpacity>
+
       </View>
       <FlatList
         data={contacts}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.listContent}
+        
       />
     </View>
   );

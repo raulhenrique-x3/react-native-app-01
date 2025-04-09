@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-export default function AddUserScreen() {
+export default function userRegister() {
   const router = useRouter();
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
