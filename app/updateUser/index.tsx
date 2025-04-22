@@ -1,38 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import api from '@/api/api';
 
-export default function UserRegister() {
+export default function UpdateUser() {
   const router = useRouter();
-  const [name, setName] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const { id, name: initialName, phone: initialPhone } = useLocalSearchParams();
+
+  const [name, setName] = useState(String(initialName || ''));
+  const [telefone, setTelefone] = useState(String(initialPhone || ''));
 
   const handleSave = async () => {
-    if (!name || !cpf || !email || !phone || !password) {
+    if (!name || !telefone) {
       Alert.alert('Erro', 'Preencha todos os campos.');
       return;
     }
 
     try {
-      const response = await api.post('/contacts', {
+      const response = await api.put(`/contacts/${id}`, {
         name,
-        cpf,
-        email,
-        phone,
-        password,
+        phone: telefone,
       });
 
-      console.log('Usuário registrado:', response.data);
-      Alert.alert('Sucesso', 'Usuário cadastrado com sucesso!');
+      console.log('Contato atualizado:', response.data);
+      Alert.alert('Sucesso', 'Contato atualizado com sucesso!');
       router.back();
     } catch (error) {
-      console.error('Erro ao cadastrar usuário:', error);
-      Alert.alert('Erro', 'Não foi possível cadastrar o usuário.');
+      console.error('Erro ao atualizar contato:', error);
+      Alert.alert('Erro', 'Não foi possível atualizar o contato.');
     }
   };
 
@@ -42,47 +38,23 @@ export default function UserRegister() {
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back-circle" size={32} color="white" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Novo Usuário</Text>
+        <Text style={styles.headerTitle}>Editar Contato</Text>
       </View>
 
       <View style={styles.form}>
         <Text style={styles.label}>Nome</Text>
         <TextInput style={styles.input} value={name} onChangeText={setName} />
 
-        <Text style={styles.label}>CPF</Text>
-        <TextInput
-          style={styles.input}
-          value={cpf}
-          onChangeText={setCpf}
-          keyboardType="numeric"
-        />
-
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
-
         <Text style={styles.label}>Telefone</Text>
         <TextInput
           style={styles.input}
-          value={phone}
-          onChangeText={setPhone}
+          value={telefone}
+          onChangeText={setTelefone}
           keyboardType="phone-pad"
         />
 
-        <Text style={styles.label}>Senha</Text>
-        <TextInput
-          style={styles.input}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-
         <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-          <Text style={styles.saveButtonText}>Salvar</Text>
+          <Text style={styles.saveButtonText}>Salvar Alterações</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -134,5 +106,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  removeButton: {
+    backgroundColor: '#FF0000',
+    marginTop: 30,
+    paddingVertical: 14,
+    alignItems: 'center',
+    borderRadius: 4,
   },
 });
