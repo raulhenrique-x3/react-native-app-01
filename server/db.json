@@ -1,0 +1,26 @@
+{
+    "contacts": [
+      {
+        "name": "Marcos Andrade cORRIGIDO",
+        "phone": "81 988553424",
+        "id": "1"
+      },
+      {
+        "id": "2",
+        "name": "Patrícia Tavares",
+        "phone": "81 998765332"
+      },
+      {
+        "id": "3",
+        "name": "Rodrigo Antunes",
+        "phone": "81 987765525"
+      },
+      {
+        "id": "15aa",
+        "name": "Raul",
+        "cpf": "88888888888",
+        "email": "raul@email.com",
+        "password": "123456789"
+      }
+    ]
+  }
